@@ -45,7 +45,31 @@ pub fn destination(path: &Path) -> Result<PathBuf> {
             Err(error) => return Err(io_error(&resolved, error)),
         }
     }
-    Ok(dunce::simplified(&resolved).to_owned())
+    // Windows may spell an existing ancestor with a short (8.3) name. Use
+    // the same filesystem spelling as the source root even for a new output.
+    for ancestor in resolved.ancestors() {
+        match dunce::canonicalize(ancestor) {
+            Ok(existing) => {
+                let suffix = resolved.strip_prefix(ancestor).map_err(|error| {
+                    Error::Invalid(format!(
+                        "invalid output path {}: {error}",
+                        resolved.display()
+                    ))
+                })?;
+                return Ok(if suffix.as_os_str().is_empty() {
+                    existing
+                } else {
+                    existing.join(suffix)
+                });
+            }
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => continue,
+            Err(error) => return Err(io_error(ancestor, error)),
+        }
+    }
+    Err(Error::Invalid(format!(
+        "output has no existing ancestor: {}",
+        resolved.display()
+    )))
 }
 
 pub fn write_new(path: &Path, bytes: &[u8]) -> Result<()> {

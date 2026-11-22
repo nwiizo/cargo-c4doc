@@ -14,7 +14,7 @@ Source digests cover the complete file. After a source changes, inspect the affe
 | Element: Observation comparison | Observed: [src/drift.rs:353–437](../../src/drift.rs#L353-L437) |
 | Element: C4 model validation | Observed: [src/check.rs:58–297](../../src/check.rs#L58-L297) |
 | Element: Document rendering | Observed: [src/render.rs:8–276](../../src/render.rs#L8-L276) |
-| Element: Output publication | Observed: [src/output.rs:64–138](../../src/output.rs#L64-L138) |
+| Element: Output publication | Observed: [src/output.rs:88–162](../../src/output.rs#L88-L162) |
 | Element: analyze | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
 | Element: RustWalker | Observed: [src/rust\_analysis.rs:278–285](../../src/rust_analysis.rs#L278-L285); [src/rust\_analysis.rs:300–369](../../src/rust_analysis.rs#L300-L369) |
 | Element: Developer workstation | **Inferred**: Illustrates local CLI execution; no specific host or production environment was investigated. |

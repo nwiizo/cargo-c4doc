@@ -42,7 +42,7 @@ Both branches assume validation succeeds. Source links show how the CLI chooses 
 | Command dispatch | Component | Rust / main.rs | Parses arguments, invokes operations, and returns results | Observed: [src/main.rs:135–281](../../src/main.rs#L135-L281) |
 | Document rendering | Component | Rust / render.rs | Converts models into Markdown, Mermaid, and evidence tables | Observed: [src/render.rs:8–276](../../src/render.rs#L8-L276) |
 | C4 model validation<br/>[Implementation](evidence.md#implementation-validation) | Component | Rust / check.rs | Checks hierarchy, views, relationships, and citations | Observed: [src/check.rs:58–297](../../src/check.rs#L58-L297) |
-| Output publication | Component | Rust / filesystem / SHA-256 | Checks for manual edits and saves prepared documents | Observed: [src/output.rs:64–138](../../src/output.rs#L64-L138) |
+| Output publication | Component | Rust / filesystem / SHA-256 | Checks for manual edits and saves prepared documents | Observed: [src/output.rs:88–162](../../src/output.rs#L88-L162) |
 
 ## Scenario
 

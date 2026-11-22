@@ -63,7 +63,7 @@ Rust analysis and observation comparison are separate commands. Comparison reads
 | Observation comparison | Component | Rust / drift.rs / persisted JSON | Finds changed targets, metadata, and source files requiring architecture review | Observed: [src/drift.rs:353–437](../../src/drift.rs#L353-L437) |
 | C4 model validation<br/>[Implementation](evidence.md#implementation-validation) | Component | Rust / check.rs | Checks hierarchy, views, relationships, and citations | Observed: [src/check.rs:58–297](../../src/check.rs#L58-L297) |
 | Document rendering | Component | Rust / render.rs | Converts models into Markdown, Mermaid, and evidence tables | Observed: [src/render.rs:8–276](../../src/render.rs#L8-L276) |
-| Output publication | Component | Rust / filesystem / SHA-256 | Checks for manual edits and saves prepared documents | Observed: [src/output.rs:64–138](../../src/output.rs#L64-L138) |
+| Output publication | Component | Rust / filesystem / SHA-256 | Checks for manual edits and saves prepared documents | Observed: [src/output.rs:88–162](../../src/output.rs#L88-L162) |
 
 ## Relationships
 

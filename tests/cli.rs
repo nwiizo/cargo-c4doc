@@ -289,7 +289,7 @@ fn component_code_mapping_validates_and_renders_its_sources() {
     let page = fs::read_to_string(root.path().join("docs/evidence.md")).unwrap();
     assert!(page.contains("Request handling entry points"));
     assert!(page.contains("Starts the request handler"));
-    assert!(page.contains("../src/main.rs#L1-L3"));
+    assert!(page.contains("../src/main.rs#L1-L3"), "{page}");
     let mut self_citing = value.clone();
     let generated = cli(root.path(), &["cite", "docs/evidence.md"]);
     success(&generated);

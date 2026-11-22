@@ -211,9 +211,9 @@
         "sources": [
           {
             "path": "src/output.rs",
-            "start_line": 64,
-            "end_line": 138,
-            "sha256": "921de4e38fb0e2db86b21d506033fe8d3a851915f36d2f572b72c246f35b3e45"
+            "start_line": 88,
+            "end_line": 162,
+            "sha256": "65bdb85c1c89c31485d414df64b4f5c7f15e3d4f6800292069546533ef4858ba"
           }
         ]
       },
