@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Formatting, Clippy, and package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+      - run: cargo fmt --check
+      - run: cargo clippy --locked --all-targets --all-features -- -D warnings
+      - run: cargo publish --dry-run --locked
+      - name: Install and test the packaged source
+        shell: bash
+        run: |
+          package_dir=$(find target/package -mindepth 1 -maxdepth 1 -type d -name 'cargo-c4doc-*' -print)
+          test -n "$package_dir"
+          cargo test --locked --all --all-targets --manifest-path "$package_dir/Cargo.toml"
+          cargo install --locked --path "$package_dir" --root "$RUNNER_TEMP/c4doc-install"
+          export PATH="$RUNNER_TEMP/c4doc-install/bin:$PATH"
+          cargo c4doc --version
+          cargo c4doc render examples/c4doc.json --root . --output examples/docs --check
+
+  test:
+    name: Test (${{ matrix.os }}, Rust ${{ matrix.toolchain }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        toolchain: [stable]
+        include:
+          - os: ubuntu-latest
+            toolchain: '1.100.0'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        with:
+          toolchain: ${{ matrix.toolchain }}
+      - run: cargo test --locked --all --all-targets

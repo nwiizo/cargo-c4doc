@@ -1,0 +1,26 @@
+---
+title: "Component: cargo-c4doc CLI — Where does the model get checked? — stage"
+---
+flowchart TB
+    accTitle: Component: cargo-c4doc CLI — Where does the model get checked#63; — stage
+    subgraph b_tool["cargo-c4doc [Software system]"]
+    subgraph b_cli["cargo-c4doc CLI [Container]"]
+    n_dispatch["Command dispatch #91;Component#93; / Rust / main.rs — Parses arguments#44; invokes operations#44; and returns results / stage: Command routing"]:::observed
+    n_analysis["Rust structural analysis #91;Component#93; / Rust / tree-sitter-rust / Cargo metadata — Traverses modules#44; definitions#44; and calls from Cargo targets / stage: Observation"]:::observed
+    n_comparison["Observation comparison #91;Component#93; / Rust / drift.rs / persisted JSON — Finds changed targets#44; metadata#44; and source files requiring architecture review / stage: Observation"]:::observed
+    n_validation["C4 model validation #91;Component#93; / Rust / check.rs — Checks hierarchy#44; views#44; relationships#44; and citations / stage: Model review"]:::observed
+    n_rendering["Document rendering #91;Component#93; / Rust / render.rs — Converts models into Markdown#44; Mermaid#44; and evidence tables / stage: Document generation"]:::observed
+    n_publishing["Output publication #91;Component#93; / Rust / filesystem / SHA-256 — Checks for manual edits and saves prepared documents / stage: Document generation"]:::observed
+    end
+    end
+    n_dispatch -->|"Requests the selected Rust project#39;s structure"| n_analysis
+    n_dispatch -->|"Compares saved observations and optionally applies the review gate"| n_comparison
+    n_dispatch -->|"Requests model diagnostics"| n_validation
+    n_dispatch -->|"Builds documents from a validated model"| n_rendering
+    n_rendering -->|"Validates the model and citations before rendering"| n_validation
+    n_dispatch -->|"Saves documents or compares them with existing output"| n_publishing
+    classDef observed fill:#e8f1fa,stroke:#28577c,color:#132f46
+    classDef inferred fill:#fff4de,stroke:#8a5100,color:#573300,stroke-dasharray:5 5
+    c4doc_note_0["Note: Auxiliary inventory and citation commands are omitted."]
+    c4doc_legend["Legend (not a model element)<br/>Blue solid boxes: Observed<br/>Orange dashed boxes: Inferred<br/>Solid arrows: Observed<br/>Dotted arrows: Inferred<br/>Observed: cited source, not semantic proof<br/>Inferred: assumption requiring review<br/>Boundary labels name their C4 type<br/>Deployment nesting shows hosting"]
+    style c4doc_legend fill:#fff,stroke:#666,color:#222

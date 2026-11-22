@@ -1,0 +1,42 @@
+[package]
+name = "cargo-c4doc"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.100"
+license = "MIT"
+description = "Evidence-backed C4 documentation tools for coding agents"
+repository = "https://github.com/nwiizo/cargo-c4doc"
+readme = "README.md"
+keywords = ["c4", "architecture", "documentation", "cargo", "cli"]
+categories = ["development-tools::cargo-plugins", "command-line-utilities"]
+include = [
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/LICENSE",
+    "/README.md",
+    "/src/**",
+    "/tests/**",
+    "/examples/**",
+    "/examples/docs/.c4doc-manifest.json",
+    "/skills/c4-rust-docs/**",
+    "/docs/**",
+]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+ignore = "0.4"
+schemars = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tempfile = "3"
+thiserror = "2"
+tree-sitter = "0.26"
+tree-sitter-rust = "0.24"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"

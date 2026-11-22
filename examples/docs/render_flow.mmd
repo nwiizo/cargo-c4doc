@@ -1,0 +1,19 @@
+---
+title: "Dynamic: cargo-c4doc CLI — What happens when I render a model?"
+---
+sequenceDiagram
+    accTitle: Dynamic: cargo-c4doc CLI — What happens when I render a model#63;
+    autonumber
+    participant n_dispatch as Command dispatch [Component / Observed]
+    participant n_rendering as Document rendering [Component / Observed]
+    participant n_validation as C4 model validation [Component / Observed]
+    participant n_publishing as Output publication [Component / Observed]
+    Note over n_dispatch,n_publishing: Legend: Solid arrows: interactions<br/>Dashed arrows: responses<br/>Observed: cited source, not semantic proof<br/>Inferred: assumption requiring review<br/>Relationship evidence does not prove execution order
+    n_dispatch->>n_rendering: Submit the model [Relationship evidence: Observed]
+    n_rendering->>n_validation: Check C4 consistency and citations [Relationship evidence: Observed]
+    n_rendering-->>n_dispatch: Return prepared documents [Relationship evidence: Observed]
+    alt Check mode
+    n_dispatch->>n_publishing: Compare the generated files with the existing guide [Relationship evidence: Observed]
+    else Write mode
+    n_dispatch->>n_publishing: Check for manual edits and save the documents [Relationship evidence: Observed]
+    end

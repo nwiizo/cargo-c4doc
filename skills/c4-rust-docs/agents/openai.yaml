@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust C4 Docs"
+  short_description: "Create evidence-backed Rust C4 docs in English or Japanese"
+  default_prompt: "Use $c4-rust-docs to document this Rust project's architecture in English unless I request another language."

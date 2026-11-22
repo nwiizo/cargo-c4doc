@@ -1,0 +1,634 @@
+{
+  "schema_version": 1,
+  "title": "Inside cargo-c4doc",
+  "description": "A coding agent reads Rust source and describes the architecture; cargo-c4doc checks the model and turns it into a linked guide. Follow that model from an author's request to generated documents, then explore how source analysis and view notation work. This example includes all seven supported view types to demonstrate the tool.",
+  "elements": [
+    {
+      "id": "author",
+      "kind": "person",
+      "name": "Developer and coding agent",
+      "description": "Inspects code and models architecture with evidence",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 14,
+            "end_line": 25,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tool",
+      "kind": "system",
+      "name": "cargo-c4doc",
+      "description": "Supports Rust C4 documentation through analysis, change review, validation, and rendering",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 26,
+            "end_line": 114,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cli",
+      "kind": "container",
+      "parent": "tool",
+      "name": "cargo-c4doc CLI",
+      "description": "Runs subcommands and emits JSON, documents, and diagnostics",
+      "technology": "Rust / clap",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 135,
+            "end_line": 299,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch",
+      "kind": "component",
+      "parent": "cli",
+      "name": "Command dispatch",
+      "description": "Parses arguments, invokes operations, and returns results",
+      "technology": "Rust / main.rs",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 135,
+            "end_line": 281,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Command routing"
+        ]
+      }
+    },
+    {
+      "id": "analysis",
+      "kind": "component",
+      "parent": "cli",
+      "name": "Rust structural analysis",
+      "description": "Traverses modules, definitions, and calls from Cargo targets",
+      "technology": "Rust / tree-sitter-rust / Cargo metadata",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/rust_analysis.rs",
+            "start_line": 118,
+            "end_line": 262,
+            "sha256": "2ee08ff58fdae34c3439df5c613aa688428fa2b399e6efd4b27032672e7ec3f9"
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Observation"
+        ]
+      }
+    },
+    {
+      "id": "comparison",
+      "kind": "component",
+      "parent": "cli",
+      "name": "Observation comparison",
+      "description": "Finds changed targets, metadata, and source files requiring architecture review",
+      "technology": "Rust / drift.rs / persisted JSON",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/drift.rs",
+            "start_line": 353,
+            "end_line": 437,
+            "sha256": "321024ed0e2ef50797d7d7ab9a47b5d1ae7a599a4ffe71d1113629c2b757c055"
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Observation"
+        ]
+      }
+    },
+    {
+      "id": "validation",
+      "kind": "component",
+      "parent": "cli",
+      "name": "C4 model validation",
+      "description": "Checks hierarchy, views, relationships, and citations",
+      "technology": "Rust / check.rs",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/check.rs",
+            "start_line": 58,
+            "end_line": 297,
+            "sha256": "162a12198976de78259c736785981183af491a7aedea99b554594aad66f5140f"
+          }
+        ]
+      },
+      "code_mapping": {
+        "coverage": "Source checks used for observed claims and component implementation mappings.",
+        "entries": [
+          {
+            "source": {
+              "path": "src/check.rs",
+              "start_line": 453,
+              "end_line": 488,
+              "sha256": "162a12198976de78259c736785981183af491a7aedea99b554594aad66f5140f"
+            },
+            "rationale": "Checks each cited range and digest against the inspected file."
+          },
+          {
+            "source": {
+              "path": "src/source.rs",
+              "start_line": 56,
+              "end_line": 81,
+              "sha256": "e09e52bcd8b7415b152e9b33fcb853f0346e90814fa350f91b8d2029f2effb90"
+            },
+            "rationale": "Opens the repository-relative source and counts the lines used for range checks."
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Model review"
+        ]
+      }
+    },
+    {
+      "id": "rendering",
+      "kind": "component",
+      "parent": "cli",
+      "name": "Document rendering",
+      "description": "Converts models into Markdown, Mermaid, and evidence tables",
+      "technology": "Rust / render.rs",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/render.rs",
+            "start_line": 8,
+            "end_line": 276,
+            "sha256": "4134426f44ab1eb4dd70fd9907bfb6c34310ea8c15ca0a1195df356db60ff2c5"
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Document generation"
+        ]
+      }
+    },
+    {
+      "id": "publishing",
+      "kind": "component",
+      "parent": "cli",
+      "name": "Output publication",
+      "description": "Checks for manual edits and saves prepared documents",
+      "technology": "Rust / filesystem / SHA-256",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/output.rs",
+            "start_line": 64,
+            "end_line": 138,
+            "sha256": "d21cd645260f93b38d1a5851b93841f6ca5f9fde5c7b0003b709ced94c946434"
+          }
+        ]
+      },
+      "perspectives": {
+        "stage": [
+          "Document generation"
+        ]
+      }
+    },
+    {
+      "id": "analyze_fn",
+      "kind": "code",
+      "parent": "analysis",
+      "name": "analyze",
+      "description": "Loads Cargo metadata and collects target analysis",
+      "technology": "Rust function",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/rust_analysis.rs",
+            "start_line": 118,
+            "end_line": 262,
+            "sha256": "2ee08ff58fdae34c3439df5c613aa688428fa2b399e6efd4b27032672e7ec3f9"
+          }
+        ]
+      },
+      "code_access": "public"
+    },
+    {
+      "id": "rust_walker",
+      "kind": "code",
+      "parent": "analysis",
+      "name": "RustWalker",
+      "description": "Traverses Rust modules and syntax with source locations",
+      "technology": "Rust struct / methods",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/rust_analysis.rs",
+            "start_line": 280,
+            "end_line": 287,
+            "sha256": "2ee08ff58fdae34c3439df5c613aa688428fa2b399e6efd4b27032672e7ec3f9"
+          },
+          {
+            "path": "src/rust_analysis.rs",
+            "start_line": 302,
+            "end_line": 371,
+            "sha256": "2ee08ff58fdae34c3439df5c613aa688428fa2b399e6efd4b27032672e7ec3f9"
+          }
+        ]
+      },
+      "code_access": "internal"
+    },
+    {
+      "id": "workstation",
+      "kind": "deployment_node",
+      "name": "Developer workstation",
+      "description": "Example local environment hosting the CLI",
+      "technology": "Operating system",
+      "environment": "local_example",
+      "evidence": {
+        "status": "inferred",
+        "reason": "Illustrates local CLI execution; no specific host or production environment was investigated."
+      }
+    },
+    {
+      "id": "local_cli",
+      "kind": "instance",
+      "parent": "workstation",
+      "instance_of": "cli",
+      "name": "CLI process",
+      "description": "Example instance started with cargo c4doc",
+      "environment": "local_example",
+      "evidence": {
+        "status": "inferred",
+        "reason": "Represents one CLI invocation to demonstrate deployment notation."
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "author_uses_tool",
+      "from": "author",
+      "to": "tool",
+      "description": "Requests analysis, change review, model validation, and documentation",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 26,
+            "end_line": 114,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "author_runs_cli",
+      "from": "author",
+      "to": "cli",
+      "description": "Supplies arguments and models, then reads results",
+      "technology": "Command line / JSON / Markdown",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 135,
+            "end_line": 299,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch_analyzes",
+      "from": "dispatch",
+      "to": "analysis",
+      "description": "Requests the selected Rust project's structure",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 137,
+            "end_line": 145,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch_compares",
+      "from": "dispatch",
+      "to": "comparison",
+      "description": "Compares saved observations and optionally applies the review gate",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 167,
+            "end_line": 184,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch_checks",
+      "from": "dispatch",
+      "to": "validation",
+      "description": "Requests model diagnostics",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 192,
+            "end_line": 233,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch_renders",
+      "from": "dispatch",
+      "to": "rendering",
+      "description": "Builds documents from a validated model",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 234,
+            "end_line": 278,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "render_checks",
+      "from": "rendering",
+      "to": "validation",
+      "description": "Validates the model and citations before rendering",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/render.rs",
+            "start_line": 8,
+            "end_line": 21,
+            "sha256": "4134426f44ab1eb4dd70fd9907bfb6c34310ea8c15ca0a1195df356db60ff2c5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dispatch_publishes",
+      "from": "dispatch",
+      "to": "publishing",
+      "description": "Saves documents or compares them with existing output",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/main.rs",
+            "start_line": 269,
+            "end_line": 277,
+            "sha256": "e3eb7c6427e9cd9c1aa1987a28d261ebb8562faf91d0ae7ca26d2cc39caf3e8a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "analyze_walks",
+      "from": "analyze_fn",
+      "to": "rust_walker",
+      "description": "Creates target traversal state and invokes file",
+      "evidence": {
+        "status": "observed",
+        "sources": [
+          {
+            "path": "src/rust_analysis.rs",
+            "start_line": 118,
+            "end_line": 262,
+            "sha256": "2ee08ff58fdae34c3439df5c613aa688428fa2b399e6efd4b27032672e7ec3f9"
+          }
+        ]
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "context",
+      "kind": "context",
+      "scope": "tool",
+      "title": "How does code become an architecture guide?",
+      "description": "The author uses cargo-c4doc to collect source observations, check a model, and generate documentation. The coding agent decides what those observations mean for the architecture.",
+      "notes": [
+        "Start at the author and follow the request to the tool. The same CLI supports collecting evidence, checking a model, reviewing source changes, and publishing a guide.",
+        "This view introduces the workflow to documentation authors. Source-file I/O is outside its scope; the responsibility and interaction views explain the implementation."
+      ],
+      "elements": [
+        "author",
+        "tool"
+      ],
+      "relationships": [
+        "author_uses_tool"
+      ]
+    },
+    {
+      "id": "containers",
+      "kind": "container",
+      "scope": "tool",
+      "title": "What do I need to run?",
+      "description": "One Rust executable provides collection, comparison, validation, and rendering. Authors pass commands and models to the CLI and read its JSON or document output.",
+      "notes": [
+        "The boundary contains one application. Rust libraries linked into it support its work without creating additional C4 Containers.",
+        "This view helps authors understand the tool's runtime shape. The coding agent is represented as an author; its hosting environment and model provider are outside this scope."
+      ],
+      "elements": [
+        "author",
+        "cli"
+      ],
+      "relationships": [
+        "author_runs_cli"
+      ]
+    },
+    {
+      "id": "components",
+      "kind": "component",
+      "scope": "cli",
+      "title": "Where does the model get checked?",
+      "description": "Document rendering calls model validation before producing a guide. Command dispatch then hands the prepared documents to publication, which checks for manual edits before saving.",
+      "notes": [
+        "Follow Command dispatch to Document rendering, then to C4 model validation. Output publication is a separate responsibility: producing a valid guide and replacing an existing directory involve different checks.",
+        "For developers changing the workflow, start at src/render.rs for document construction or src/output.rs for publication. The source links below identify the relevant implementations.",
+        "Rust analysis and observation comparison are separate commands. Comparison reads saved observations and does not invoke analysis. Auxiliary inventory and citation commands are omitted from this view."
+      ],
+      "elements": [
+        "dispatch",
+        "analysis",
+        "comparison",
+        "validation",
+        "rendering",
+        "publishing"
+      ],
+      "relationships": [
+        "dispatch_analyzes",
+        "dispatch_compares",
+        "dispatch_checks",
+        "dispatch_renders",
+        "render_checks",
+        "dispatch_publishes"
+      ],
+      "perspective": {
+        "key": "stage"
+      },
+      "show_system_boundary": true,
+      "diagram_notes": [
+        "Auxiliary inventory and citation commands are omitted."
+      ]
+    },
+    {
+      "id": "render_flow",
+      "kind": "dynamic",
+      "scope": "cli",
+      "title": "What happens when I render a model?",
+      "description": "After validation, Command dispatch asks Output publication to check the existing guide or save the prepared documents.",
+      "notes": [
+        "Follow the model from Command dispatch to Document rendering. The return arrow carries documents prepared in memory; saving happens afterward through Output publication.",
+        "Both branches assume validation succeeds. Source links show how the CLI chooses the publication mode. A failed check reports stale output, and an edited file prevents replacement."
+      ],
+      "elements": [
+        "dispatch",
+        "rendering",
+        "validation",
+        "publishing"
+      ],
+      "steps": [
+        {
+          "relationship": "dispatch_renders",
+          "description": "Submit the model"
+        },
+        {
+          "relationship": "render_checks",
+          "description": "Check C4 consistency and citations"
+        },
+        {
+          "relationship": "dispatch_renders",
+          "description": "Return prepared documents",
+          "response": true
+        },
+        {
+          "kind": "alternative",
+          "branches": [
+            {
+              "label": "Check mode",
+              "steps": [
+                {
+                  "relationship": "dispatch_publishes",
+                  "description": "Compare the generated files with the existing guide"
+                }
+              ]
+            },
+            {
+              "label": "Write mode",
+              "steps": [
+                {
+                  "relationship": "dispatch_publishes",
+                  "description": "Check for manual edits and save the documents"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "kind": "code",
+      "scope": "analysis",
+      "title": "How does analysis reach the Rust modules?",
+      "description": "The analyze function loads Cargo metadata and creates RustWalker state to traverse module files and collect syntax observations.",
+      "notes": [
+        "This implementation view is for developers changing source traversal. Follow the call from analyze into RustWalker, then use the cited locations to inspect its state and file handling.",
+        "It demonstrates Code notation using a function and a struct. Syntax observations require further interpretation before they become architectural responsibilities."
+      ],
+      "elements": [
+        "analyze_fn",
+        "rust_walker"
+      ],
+      "relationships": [
+        "analyze_walks"
+      ]
+    },
+    {
+      "id": "landscape",
+      "kind": "landscape",
+      "title": "How would a broader system map begin?",
+      "description": "This minimal Landscape example contains cargo-c4doc and its author without selecting one system as the scope.",
+      "notes": [
+        "This additional view is for authors learning the available notation. It has the same elements as Context because this example models only one system; it does not add an invented ecosystem.",
+        "In a project guide, add a Landscape view when relationships across multiple systems answer a useful question. It is not a required stop for every reader."
+      ],
+      "elements": [
+        "author",
+        "tool"
+      ],
+      "relationships": [
+        "author_uses_tool"
+      ]
+    },
+    {
+      "id": "deployment",
+      "kind": "deployment",
+      "scope": "tool",
+      "environment": "local_example",
+      "title": "How could a local CLI instance be shown?",
+      "description": "This inferred deployment example places one CLI instance on a developer workstation. It illustrates notation and does not document an observed host.",
+      "notes": [
+        "For authors learning Deployment notation: the outer node describes the hosting environment, and the nested instance refers back to the CLI Container. The inferred styling keeps this assumption visible.",
+        "Replace this example with inspected environment evidence before using it as an account of a real deployment."
+      ],
+      "elements": [
+        "workstation",
+        "local_cli"
+      ]
+    }
+  ],
+  "questions": []
+}
