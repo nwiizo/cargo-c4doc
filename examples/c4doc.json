@@ -94,7 +94,7 @@
             "path": "src/rust_analysis.rs",
             "start_line": 118,
             "end_line": 260,
-            "sha256": "e3cf71a66af44f89eb08b67d104373603678ad972a553e5be5a6dfb83ef64bfc"
+            "sha256": "71f902a0a3259435c6d6b2e1484e853f2b9c4a80c383d895e2be4f4cf7663d5e"
           }
         ]
       },
@@ -237,7 +237,7 @@
             "path": "src/rust_analysis.rs",
             "start_line": 118,
             "end_line": 260,
-            "sha256": "e3cf71a66af44f89eb08b67d104373603678ad972a553e5be5a6dfb83ef64bfc"
+            "sha256": "71f902a0a3259435c6d6b2e1484e853f2b9c4a80c383d895e2be4f4cf7663d5e"
           }
         ]
       },
@@ -257,13 +257,13 @@
             "path": "src/rust_analysis.rs",
             "start_line": 278,
             "end_line": 285,
-            "sha256": "e3cf71a66af44f89eb08b67d104373603678ad972a553e5be5a6dfb83ef64bfc"
+            "sha256": "71f902a0a3259435c6d6b2e1484e853f2b9c4a80c383d895e2be4f4cf7663d5e"
           },
           {
             "path": "src/rust_analysis.rs",
             "start_line": 300,
             "end_line": 369,
-            "sha256": "e3cf71a66af44f89eb08b67d104373603678ad972a553e5be5a6dfb83ef64bfc"
+            "sha256": "71f902a0a3259435c6d6b2e1484e853f2b9c4a80c383d895e2be4f4cf7663d5e"
           }
         ]
       },
@@ -445,7 +445,7 @@
             "path": "src/rust_analysis.rs",
             "start_line": 118,
             "end_line": 260,
-            "sha256": "e3cf71a66af44f89eb08b67d104373603678ad972a553e5be5a6dfb83ef64bfc"
+            "sha256": "71f902a0a3259435c6d6b2e1484e853f2b9c4a80c383d895e2be4f4cf7663d5e"
           }
         ]
       }

@@ -520,7 +520,8 @@ impl RustWalker<'_> {
                 .push("non-UTF-8 module path".into());
             return;
         };
-        self.file(path, &module, context.attributes, context.depth + 1);
+        let path = path.replace(std::path::MAIN_SEPARATOR, "/");
+        self.file(&path, &module, context.attributes, context.depth + 1);
     }
 
     fn item(&mut self, node: Node<'_>, context: &Context<'_>) {
