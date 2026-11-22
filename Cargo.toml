@@ -24,6 +24,7 @@ include = [
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
+dunce = "1"
 ignore = "0.4"
 schemars = "1"
 serde = { version = "1", features = ["derive"] }

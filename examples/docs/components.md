@@ -59,7 +59,7 @@ Rust analysis and observation comparison are separate commands. Comparison reads
 | Name | Kind | Technology | Responsibility | Evidence |
 | --- | --- | --- | --- | --- |
 | Command dispatch | Component | Rust / main.rs | Parses arguments, invokes operations, and returns results | Observed: [src/main.rs:135–281](../../src/main.rs#L135-L281) |
-| Rust structural analysis<br/>[How does analysis reach the Rust modules?](code.md) | Component | Rust / tree-sitter-rust / Cargo metadata | Traverses modules, definitions, and calls from Cargo targets | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
+| Rust structural analysis<br/>[How does analysis reach the Rust modules?](code.md) | Component | Rust / tree-sitter-rust / Cargo metadata | Traverses modules, definitions, and calls from Cargo targets | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
 | Observation comparison | Component | Rust / drift.rs / persisted JSON | Finds changed targets, metadata, and source files requiring architecture review | Observed: [src/drift.rs:353–437](../../src/drift.rs#L353-L437) |
 | C4 model validation<br/>[Implementation](evidence.md#implementation-validation) | Component | Rust / check.rs | Checks hierarchy, views, relationships, and citations | Observed: [src/check.rs:58–297](../../src/check.rs#L58-L297) |
 | Document rendering | Component | Rust / render.rs | Converts models into Markdown, Mermaid, and evidence tables | Observed: [src/render.rs:8–276](../../src/render.rs#L8-L276) |

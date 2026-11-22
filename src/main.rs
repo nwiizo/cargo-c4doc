@@ -238,9 +238,9 @@ fn run(command: Command) -> Result<bool> {
             check,
             strict,
         } => {
-            let root = root.canonicalize().map_err(|e| io_error(&root, e))?;
+            let root = dunce::canonicalize(&root).map_err(|e| io_error(&root, e))?;
             let output = output::destination(&output)?;
-            let model_path = model.canonicalize().map_err(|e| io_error(&model, e))?;
+            let model_path = dunce::canonicalize(&model).map_err(|e| io_error(&model, e))?;
             if model_path.starts_with(&output) {
                 return Err(Error::Invalid(
                     "input model must be outside the generated document directory".into(),

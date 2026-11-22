@@ -10,13 +10,13 @@ Source digests cover the complete file. After a source changes, inspect the affe
 | Element: cargo-c4doc | Observed: [src/main.rs:26–114](../../src/main.rs#L26-L114) |
 | Element: cargo-c4doc CLI | Observed: [src/main.rs:135–299](../../src/main.rs#L135-L299) |
 | Element: Command dispatch | Observed: [src/main.rs:135–281](../../src/main.rs#L135-L281) |
-| Element: Rust structural analysis | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
+| Element: Rust structural analysis | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
 | Element: Observation comparison | Observed: [src/drift.rs:353–437](../../src/drift.rs#L353-L437) |
 | Element: C4 model validation | Observed: [src/check.rs:58–297](../../src/check.rs#L58-L297) |
 | Element: Document rendering | Observed: [src/render.rs:8–276](../../src/render.rs#L8-L276) |
 | Element: Output publication | Observed: [src/output.rs:64–138](../../src/output.rs#L64-L138) |
-| Element: analyze | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
-| Element: RustWalker | Observed: [src/rust\_analysis.rs:280–287](../../src/rust_analysis.rs#L280-L287); [src/rust\_analysis.rs:302–371](../../src/rust_analysis.rs#L302-L371) |
+| Element: analyze | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
+| Element: RustWalker | Observed: [src/rust\_analysis.rs:278–285](../../src/rust_analysis.rs#L278-L285); [src/rust\_analysis.rs:300–369](../../src/rust_analysis.rs#L300-L369) |
 | Element: Developer workstation | **Inferred**: Illustrates local CLI execution; no specific host or production environment was investigated. |
 | Element: CLI process | **Inferred**: Represents one CLI invocation to demonstrate deployment notation. |
 | Relationship: Requests analysis, change review, model validation, and documentation | Observed: [src/main.rs:26–114](../../src/main.rs#L26-L114) |
@@ -27,7 +27,7 @@ Source digests cover the complete file. After a source changes, inspect the affe
 | Relationship: Builds documents from a validated model | Observed: [src/main.rs:234–278](../../src/main.rs#L234-L278) |
 | Relationship: Validates the model and citations before rendering | Observed: [src/render.rs:8–21](../../src/render.rs#L8-L21) |
 | Relationship: Saves documents or compares them with existing output | Observed: [src/main.rs:269–277](../../src/main.rs#L269-L277) |
-| Relationship: Creates target traversal state and invokes file | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
+| Relationship: Creates target traversal state and invokes file | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
 
 <a id="implementation-validation"></a>
 

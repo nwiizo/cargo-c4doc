@@ -116,7 +116,7 @@ pub struct Import {
 }
 
 pub fn analyze(path: &Path, package: Option<&str>) -> Result<Analysis> {
-    let path = path.canonicalize().map_err(|e| io_error(path, e))?;
+    let path = dunce::canonicalize(path).map_err(|e| io_error(path, e))?;
     let manifest = if path.is_dir() {
         path.join("Cargo.toml")
     } else {
@@ -148,9 +148,7 @@ pub fn analyze(path: &Path, package: Option<&str>) -> Result<Analysis> {
         )));
     }
     let metadata: Metadata = serde_json::from_slice(&output.stdout)?;
-    let source_root = metadata
-        .workspace_root
-        .canonicalize()
+    let source_root = dunce::canonicalize(&metadata.workspace_root)
         .map_err(|e| io_error(&metadata.workspace_root, e))?;
     let root_is_package = metadata
         .packages

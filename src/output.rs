@@ -45,7 +45,7 @@ pub fn destination(path: &Path) -> Result<PathBuf> {
             Err(error) => return Err(io_error(&resolved, error)),
         }
     }
-    Ok(resolved)
+    Ok(dunce::simplified(&resolved).to_owned())
 }
 
 pub fn write_new(path: &Path, bytes: &[u8]) -> Result<()> {

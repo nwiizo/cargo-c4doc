@@ -34,13 +34,13 @@ It demonstrates Code notation using a function and a struct. Syntax observations
 
 | Name | Kind | Technology | Responsibility | Evidence |
 | --- | --- | --- | --- | --- |
-| analyze / Public | Code | Rust function | Loads Cargo metadata and collects target analysis | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
-| RustWalker / Internal | Code | Rust struct / methods | Traverses Rust modules and syntax with source locations | Observed: [src/rust\_analysis.rs:280–287](../../src/rust_analysis.rs#L280-L287); [src/rust\_analysis.rs:302–371](../../src/rust_analysis.rs#L302-L371) |
+| analyze / Public | Code | Rust function | Loads Cargo metadata and collects target analysis | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
+| RustWalker / Internal | Code | Rust struct / methods | Traverses Rust modules and syntax with source locations | Observed: [src/rust\_analysis.rs:278–285](../../src/rust_analysis.rs#L278-L285); [src/rust\_analysis.rs:300–369](../../src/rust_analysis.rs#L300-L369) |
 
 ## Relationships
 
 | From → To | Interaction | Technology | Evidence |
 | --- | --- | --- | --- |
-| analyze → RustWalker | Creates target traversal state and invokes file | — | Observed: [src/rust\_analysis.rs:118–262](../../src/rust_analysis.rs#L118-L262) |
+| analyze → RustWalker | Creates target traversal state and invokes file | — | Observed: [src/rust\_analysis.rs:118–260](../../src/rust_analysis.rs#L118-L260) |
 
 Continue reading: [How would a broader system map begin?](landscape.md).
